@@ -90,5 +90,4 @@ class Comment
         }
         return false;
     }
-
 }
