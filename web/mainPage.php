@@ -12,10 +12,12 @@ $user = loggedUser($connection);
 
 ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="pl">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Index</title>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
@@ -27,12 +29,17 @@ $user = loggedUser($connection);
                 <a href='logout.php'>Wyloguj się</a> <?php } ?> </div>
     </div>
     <h1>Witaj na Twitterze!</h1>
-
+    <div class="container">
     <form action="" method="POST">
         <h2>Napisz tweeta: </h2>
         <textarea name="tweetText" cols="64" rows="5" placeholder="Napisz tweeta" maxlength="140"></textarea><br/>
         <input type="submit" value="Tweetnij"/><hr/>
     </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.js"></script>
     </body>
     </html>
 
@@ -57,6 +64,7 @@ $myTweets = Tweet::loadAllTweets($connection);
 foreach ($myTweets as $row) {
     //var_dump($row['id']);
     //echo "Id tweeta ".$row['id']."<br/>";
+    echo "<div class='container'>";
     echo "W dniu ".$row['date']." użytkownik ".$row['username']." napisał: <br/>";
     echo $row['text'] . "<br/>";
     echo "<form action='' method='POST'>";
@@ -64,6 +72,7 @@ foreach ($myTweets as $row) {
     echo "<input type='submit' value='Dodaj komentarz'/>";
     echo "<input type='hidden' name='tweetId' value='".$row['id']."'/>";
     echo "</form>";
+    echo "</div>";
 }
 
 

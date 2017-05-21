@@ -28,9 +28,8 @@
             </div>
         </form>
     </div>
-    <hr/>
     <div class="container">
-        Nie masz konta? <a href="registerForm.php">Zarejestruj się</a>
+        <h3>Nie masz konta? <a href="registerForm.php">Zarejestruj się</a></h3>
     </div>
 <!--        <form method="POST" action="login.php">-->
 <!--            <p>Zaloguj się na swoje konto</p>-->
