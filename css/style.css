@@ -3,6 +3,7 @@ body
     background-color: #00b0ff;
     background-image: url("tweet.jpg");
     background-size: contain;
+    color: #080808;
 }
 
 h1

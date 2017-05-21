@@ -11,10 +11,12 @@ $user = loggedUser($connection);
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Site</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -27,7 +29,8 @@ $user = loggedUser($connection);
 </div>
 <h1>Witaj na Twitterze!</h1>
 
-<h3>Wszystkie twoje tweety:</h3>
+<div class="container">
+    <h3>Wszystkie twoje tweety:</h3>
 
 <?php
 
@@ -35,4 +38,11 @@ $myTweets = Tweet::loadTweetByUserId($connection, $_SESSION['user']);
 foreach ($myTweets as $row) {
     echo $row['text'] . "<br/>";
     echo $row['date'] . "<br/>";
-}
+}?>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="../js/bootstrap.js"></script>
+</body>
+</html>
