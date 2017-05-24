@@ -9,8 +9,10 @@
 </head>
 <body>
 <div class="container">
-    <h3>Masz konto? <a href="loginForm.php">Zaloguj się</a></h3>
-    <h3>Utwórz nowe konto na Twiterze</h3>
+    <div class="row">
+        <h4>Masz konto? <a href="loginForm.php" class="btn btn-primary">Zaloguj się</a></h4>
+    </div>
+    <h4>Utwórz nowe konto na Twiterze</h4>
     <form method="POST" action="register.php" class="form-horizontal">
         <div class="form-group">
             <label for="nameField" class="col-xs-2">Login:</label>

@@ -111,7 +111,7 @@ class Tweet
     static public function loadTweetByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
-            "SELECT user.username as username,tweet.tweetText as text,tweet.creationDate as date FROM tweet JOIN user ON tweet.userId = user.id WHERE tweet.userId = $userId ORDER BY creationDate DESC";
+            "SELECT tweet.id as id,tweet.tweetText as text,tweet.creationDate as date FROM tweet JOIN user ON tweet.userId = user.id WHERE tweet.userId = $userId ORDER BY creationDate DESC";
 
         $result = $connection->query($sql);
 

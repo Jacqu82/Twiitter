@@ -75,7 +75,7 @@ class Comment
 
             if ($result) {
                 $this->id = $connection->insert_id;
-                echo "Dodałeś komentarz";
+                //echo "Dodałeś komentarz";
             } else {
                 die("Connection Error" . $connection->connect_error);
             }
@@ -89,5 +89,31 @@ class Comment
             }
         }
         return false;
+    }
+
+    static public function loadAllCommentsByTweetId(mysqli $connection, $tweetId)
+    {
+        $sql = /** @lang text */
+            "SELECT user.username as username,comment.commentText as text,comment.creationDate as date, user.id FROM comment JOIN user ON userId=user.id WHERE comment.tweetId=".$tweetId." ORDER BY creationDate DESC";
+
+            $result = $connection->query($sql);
+
+            if ($result == false) {
+                die("Connection Error" . $connection->error);
+            }
+            return $result;
+    }
+
+    static public function loadAllComments(mysqli $connection)
+    {
+        $sql = /** @lang text */
+            "SELECT user.username as username,comment.id as id,comment.commentText as text,comment.creationDate as date FROM comment JOIN user ON userId=user.id JOIN tweet ON comment.tweetId = tweet.id ORDER BY date DESC";
+
+            $result = $connection->query($sql);
+
+            if ($result == false) {
+                die("Connection Error".$connection->error);
+            }
+            return $result;
     }
 }

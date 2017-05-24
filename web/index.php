@@ -21,9 +21,9 @@ $user = loggedUser($connection);
 <body>
 <h1>Witaj na Twiterze!</h1>
 <div class="container">
-    <h3><a href="loginForm.php">Zaloguj się na swoje konto</a></h3>
+    <h3><a href="loginForm.php" class="btn btn-primary">Zaloguj się na swoje konto</a></h3>
 
-    <h3><a href="registerForm.php">Utwórz nowe konto</a></h3>
+    <h3><a href="registerForm.php" class="btn btn-primary">Utwórz nowe konto</a></h3>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

@@ -75,10 +75,32 @@ class User
 
             if ($result) {
                 $this->id = $connection->insert_id;
-                echo "Cieszymy się że tu jesteś, $this->username<br/>";
-                echo '<a href="../web/loginForm.php">Zaloguj się na swoje konto</a>';
+                ?>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div  style="text-align: center" class="container">
+        <h3>Cieszymy się że tu jesteś, <?php echo $this->username?></h3>
+        <h3><a href="../web/loginForm.php">Zaloguj się na swoje konto</a></h3>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.js"></script>
+</body>
+</html>
+<!--                echo "Cieszymy się że tu jesteś, $this->username<br/>";-->
+<!--                echo '<a href="../web/loginForm.php">Zaloguj się na swoje konto</a>';-->
+<?php
             } else {
-                echo "Wystąpił błąd podczas rejestracji, spróbuj jeszcze raz!";
+                echo "Wystąpił błąd podczas rejestracji, spróbuj jeszcze raz!<br/>";
                 die("Connection Error! " . $connection->connect_error);
             }
         } else {

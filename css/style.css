@@ -3,46 +3,31 @@ body
     background-color: #00b0ff;
     background-image: url("tweet.jpg");
     background-size: contain;
-    color: #080808;
+    color: #000000;
 }
 
 h1
 {
     text-align: center;
     color: white;
-    clear: both;
+    /*clear: both;*/
     text-shadow: 2px 3px 6px blue, 4px 6px 6px #7c4fff;
     padding: 20px;
 }
 
-a {
-    text-decoration: none;
-    color: #0000F0;
-    text-shadow: 2px 3px 6px, 4px 6px 6px #7c4fff;
-}
+/*a {*/
+    /*text-decoration: none;*/
+    /*color: #0000F0;*/
+    /*text-shadow: 2px 3px 6px, 4px 6px 6px #7c4fff;*/
+/*}*/
 
 a:hover {
-    color: #f8bb00;
+    /*color: #f8bb00;*/
+    text-decoration: none;
 }
 
-#message
-{
-    float: left;
+h3 {
+    text-align: center;
 }
 
-#login
-{
-    float: right;
-}
-
-#user
-{
-    float: left;
-}
-
-#logged
-{
-    color: white;
-    text-shadow: 2px 3px 6px blue, 4px 6px 6px gold;
-}
 
