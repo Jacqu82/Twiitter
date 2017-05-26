@@ -74,27 +74,6 @@ class Tweet
         return null;
     }
 
-    static public function loadAllTweetsByUserId(mysqli $connection, $userId)
-    {
-        $sql = /** @lang text */
-            "SELECT * FROM tweet WHERE userId = $userId ORDER BY creationDate DESC";
-        $result = $connection->query($sql);
-        $ret = [];
-
-        if ($result == true && $result->num_rows != 0) {
-            foreach ($result as $row) {
-                $tweet = new Tweet();
-                $tweet->id = $row['id'];
-                $tweet->userId = $row['userId'];
-                $tweet->tweetText = $row['tweetText'];
-                $tweet->creationDate = $row['creationDate'];
-
-                $ret[] = $tweet;
-            }
-        }
-        return $ret;
-    }
-
     static public function loadAllTweets(mysqli $connection)
     {
         $sql = /** @lang text */
@@ -145,6 +124,4 @@ class Tweet
         }
         return false;
     }
-
-
 }

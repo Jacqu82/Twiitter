@@ -24,7 +24,7 @@ if (isset($_SESSION['user'])) { ?>
     <div class="container">
         <div class="row">
             <div class="col-md-2 col-sm-3 col-xs-3 row1">
-                <a href="../src/Message.php" class="btn btn-primary btn-block">Wiadomości</a>
+                <a href="messageSite.php" class="btn btn-primary btn-block">Wiadomości</a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3 row1">
                 <a href="userSite.php" class="btn btn-primary btn-block">Twoja strona</a>
@@ -45,7 +45,7 @@ if (isset($_SESSION['user'])) { ?>
                     <h3>Napisz tweeta: </h3>
                     <textarea name="tweetText" cols="64" rows="5" placeholder="Napisz tweeta"
                               maxlength="140"></textarea><br/>
-                    <input type="submit" value="Tweetnij"/>
+                    <button class='btn btn-primary' type ='submit'>Tweetnij</button>
                 </form>
                 <hr/>
             </div>
@@ -72,13 +72,11 @@ if (isset($_SESSION['user'])) { ?>
 
                 $myTweets = Tweet::loadAllTweets($connection);
                 foreach ($myTweets as $row) {
-                    //var_dump($row['id']);
-                    //echo "Id tweeta ".$row['id']."<br/>";
                     echo "W dniu " . $row['date'] . " użytkownik " . $row['username'] . " napisał: <br/>";
                     echo $row['text'] . "<br/>";
                     echo "<form action='' method='POST'>";
                     echo "<textarea name='commentText' cols='64' rows='2' placeholder='Dodaj swój komentarz' maxlength='60'></textarea><br/>";
-                    echo "<input type='submit' value='Dodaj komentarz'/>";
+                    echo "<button class='btn btn-primary' type ='submit'>Dodaj komentarz</button>";
                     echo "<input type='hidden' name='tweetId' value='" . $row['id'] . "'/>";
                     echo "</form>";
                     $myComments = Comment::loadAllCommentsByTweetId($connection, $row['id']);

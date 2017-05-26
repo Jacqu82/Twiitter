@@ -97,7 +97,7 @@ class Message
 
             if ($result) {
                 $this->id = $connection->insert_id;
-                echo "Wysłałeś wiadomość";
+//                echo "Wysłałeś wiadomość";
             } else {
                 die("Connection Error" . $connection->connect_error);
             }
@@ -111,6 +111,32 @@ class Message
             }
         }
         return false;
+    }
+
+    static public function loadAllSendMessagesByUserId(mysqli $connection, $userId)
+    {
+        $sql = /** @lang text */
+            "SELECT message.messageText as text,message.receiverId as receiver,message.creationDate as date FROM message JOIN user ON message.senderId = user.id WHERE message.senderId = $userId ORDER BY creationDate DESC";
+
+        $result = $connection->query($sql);
+
+        if ($result == false) {
+            die("Connection Error" . $connection->error);
+        }
+        return $result;
+    }
+
+    static public function loadAllReceivedMessagesByUserId(mysqli $connection, $userId)
+    {
+        $sql = /** @lang text */
+            "SELECT message.messageText as text,message.senderId as sender,message.creationDate as date FROM message JOIN user ON message.receiverId = user.id WHERE message.receiverId = $userId ORDER BY creationDate DESC";
+
+        $result = $connection->query($sql);
+
+        if ($result == false) {
+            die("Connection Error" . $connection->error);
+        }
+        return $result;
     }
 
 
