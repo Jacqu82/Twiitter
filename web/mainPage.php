@@ -116,5 +116,5 @@ if (isset($_SESSION['user'])) { ?>
     </html>
     <?php
 } else {
-    header('Location: index.php');
+    header('Location: book.php');
 }

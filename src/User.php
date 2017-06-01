@@ -190,10 +190,11 @@ class User
         }
     }
 
-    static public function loadAllUsers(mysqli $connection)
+    static public function loadAllUsersExcerptMe(mysqli $connection, $me)
     {
         $sql = /** @lang text */
-            "SELECT user.id as id,user.username as username,user.email as email,user.password as password FROM user";
+            "SELECT user.id as id,user.username as username,user.email as email,user.password as password FROM user 
+            WHERE user.id <> $me";
 
         $result = $connection->query($sql);
 
@@ -207,7 +208,7 @@ class User
     {
         if ($this->id != -1) {
             $sql = /** @lang text */
-                "DELETE FROM user WHERE id = $this->>id";
+                "DELETE FROM user WHERE id = $this->id";
             $result = $connection->query($sql);
             if ($result) {
                 $this->id = -1;

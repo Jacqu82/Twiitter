@@ -82,7 +82,7 @@ class Message
     }
 
 
-    public function setMessageStatus($messageStatus)
+    public function _setMessageStatus($messageStatus)
     {
         $this->messageStatus = $messageStatus;
     }
@@ -116,7 +116,13 @@ class Message
     static public function loadAllSendMessagesByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
-            "SELECT message.messageText as text,message.receiverId as receiver,message.creationDate as date FROM message JOIN user ON message.senderId = user.id WHERE message.senderId = $userId ORDER BY creationDate DESC";
+            "SELECT user.username, 
+            message.messageText as text,
+            message.creationDate as date 
+            FROM message 
+            JOIN user ON message.receiverId = user.id 
+            WHERE message.senderId = $userId 
+            ORDER BY creationDate DESC";
 
         $result = $connection->query($sql);
 
@@ -126,10 +132,32 @@ class Message
         return $result;
     }
 
+    static public function setMessageStatus(mysqli $connection, $messageId, $status)
+    {
+        $sql = /** @lang text */
+            "UPDATE message SET messageStatus = '$status' WHERE id = $messageId";
+
+        $result = $connection->query($sql);
+
+        if ($result == false) {
+            die("Connection Error" . $connection->error);
+        }
+        return true;
+    }
+
     static public function loadAllReceivedMessagesByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
-            "SELECT message.messageText as text,message.senderId as sender,message.creationDate as date FROM message JOIN user ON message.receiverId = user.id WHERE message.receiverId = $userId ORDER BY creationDate DESC";
+            "SELECT user.username,
+            message.id, 
+            message.messageStatus as status,
+            message.messageText as text,
+            message.senderId as sender,
+            message.creationDate as date 
+            FROM message 
+            JOIN user ON message.senderId = user.id 
+            WHERE message.receiverId = $userId 
+            ORDER BY creationDate DESC";
 
         $result = $connection->query($sql);
 

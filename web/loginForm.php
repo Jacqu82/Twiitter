@@ -31,22 +31,6 @@
     </div>
     <h4>Nie masz konta? <a href="registerForm.php" class="btn btn-primary">Zarejestruj się</a></h4
 </div>
-<!--        <form method="POST" action="login.php">-->
-<!--            <p>Zaloguj się na swoje konto</p>-->
-<!--            <p>-->
-<!--                <label>-->
-<!--                    Login: <input name="username" type="text">-->
-<!--                </label>-->
-<!--            </p>-->
-<!--            <p>-->
-<!--                <label>-->
-<!--                    Hasło: <input name="password" type="password">-->
-<!--                </label>-->
-<!--            </p>-->
-<!--            <p>-->
-<!--                <input type="submit" value="Zaloguj się">-->
-<!--            </p>-->
-<!--        </form>-->
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

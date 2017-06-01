@@ -10,6 +10,19 @@ session_start();
 $user = loggedUser($connection);
 
 if (isset($_SESSION['user'])) { ?>
+
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['set_message_as_read']) && isset($_POST['message_id'])) {
+            $id = $_POST['message_id'];
+            Message::setMessageStatus($connection, $id, 1);
+        } else if (isset($_POST['set_message_as_unread']) && isset($_POST['message_id'])) {
+            $id = $_POST['message_id'];
+            Message::setMessageStatus($connection, $id, 0);
+        }
+    }
+
+    ?>
     <!DOCTYPE html>
     <html lang="pl">
     <head>
@@ -41,22 +54,34 @@ if (isset($_SESSION['user'])) { ?>
         <div class="row">
             <div class="col-md-6">
                 <?php
+
                 $receive = Message::loadAllReceivedMessagesByUserId($connection, $_SESSION['user']);
                 echo "<h3>Skrzynka odbiorcza:</h3>";
-                foreach ($receive as $value) {
-                    echo "Od " . $value['sender'] . "<br/>";
-                    echo $value['text'] . "<br/>";
-                    echo $value['date'] . "<br/>";
+                foreach ($receive as $row) {
+                    echo "Od " . $row['username'] . "<br/>";
+                    if ($row['status'] == 0) {
+                        echo "<form method='POST'>";
+                        echo "<b>" . $row['text'] . "<br/>" . $row['date'] . "</b><br/>
+                            <input type='submit'  name='set_message_as_read' value='Oznacz jako przeczytaną' class='btn btn-success' />
+                            <input type='hidden' name='message_id' value='" . $row['id'] . " '>
+                        </form>";
+                    } else {
+                        echo "<form method='POST'>";
+                        echo $row['text'] . "<br/>" . $row['date'] . "<br/>
+                            <input type='submit'  name='set_message_as_unread' value='Oznacz jako nie przeczytaną' class='btn btn-success' />
+                            <input type='hidden' name='message_id' value='" . $row['id'] . " '>
+                        </form>";
+                    }
                     echo "<hr/>";
                 }
                 echo "</div>";
                 echo "<div class='col-md-6'>";
-                $receive = Message::loadAllSendMessagesByUserId($connection, $_SESSION['user']);
+                $send = Message::loadAllSendMessagesByUserId($connection, $_SESSION['user']);
                 echo "<h3>Skrzynka nadawcza:</h3>";
-                foreach ($receive as $value) {
-                    echo "Do " . $value['receiver'] . "<br/>";
+                foreach ($send as $value) {
+                    echo "Do " . $value['username'] . "<br/>";
                     echo $value['text'] . "<br/>";
-                    echo $value['date']."<br/>";
+                    echo $value['date'] . "<br/>";
                     echo "<hr/>";
                 }
                 ?>

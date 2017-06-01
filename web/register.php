@@ -21,6 +21,3 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         $user->saveToDB($connection);
     }
 }
-//<a href="login.php">Zaloguj się</a>
-//header('Location: index.php');
-

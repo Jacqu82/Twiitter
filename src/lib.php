@@ -1,7 +1,6 @@
 <?php
 
 require_once 'User.php';
-require_once 'Tweet.php';
 
 function loggedUser($connection)
 {
@@ -11,11 +10,3 @@ function loggedUser($connection)
 
     return false;
 }
-
-//function tweetId($connection)
-//{
-//    if (isset($_SESSION['tweet'])) {
-//        return Tweet::loadTweetById($connection, $_SESSION['tweetId']);
-//    }
-//    return false;
-//}

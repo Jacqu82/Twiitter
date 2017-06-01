@@ -23,20 +23,25 @@ if (isset($_SESSION['user'])) {
     </head>
     <body>
     <div class="container">
-        <div class="row">
+        <div class="col-md-12">
             <div class="col-md-2 col-sm-3 col-xs-3 row1">
                 <a href="messageSite.php" class="btn btn-primary btn-block">Wiadomości</a>
             </div>
             <div class="col-md-2 col-sm-3 col-xs-3 row1">
                 <a href="mainPage.php" class="btn btn-primary btn-block">Strona główna</a>
             </div>
-            <?php if ($user) {
-                echo "<span style='font-size: 25px;'>Jesteś zalogowany jako: " . $user->getUsername() . "</span>";
-            } ?>
-            <div class="col-md-2 col-sm-3 col-xs-3 col-md-push-6 row1">
+            <div class="col-md-4 col-sm-3 col-xs-3 row1">
+                <?php if ($user) {
+                    echo "<span style='font-size: 23px;'>Jesteś zalogowany jako: " . $user->getUsername() . "</span>";
+                } ?>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3 row1">
+                <a href="editUserProfile.php" class="btn btn-primary btn-block">Edytuj profil</a>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3 row1">
                 <a href='logout.php' class="btn btn-success btn-block">Wyloguj się</a>
             </div>
-        </div>
+        </div><br/><br/>
         <div class="row">
             <a href="userSite.php"><h1>Witaj na Twiterze!</h1></a>
         </div>
@@ -68,5 +73,5 @@ if (isset($_SESSION['user'])) {
     </html>
     <?php
 } else {
-    header('Location: index.php');
+    header('Location: book.php');
 }

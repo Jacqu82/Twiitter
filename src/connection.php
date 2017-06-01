@@ -8,4 +8,3 @@ if ($connection->connect_errno) {
     die('Can not connect to database: ' . $connection->connect_error);
 }
 $connection->query("SET CHARACTER SET utf8");
-//return $connection;

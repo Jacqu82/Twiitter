@@ -43,7 +43,7 @@ if (isset($_SESSION['user'])) { ?>
                 <form action="" method="POST">
                     <h3>Napisz wiadomość: </h3>
                     <?php
-                    $user = User::loadAllUsers($connection);
+                    $user = User::loadAllUsersExcerptMe($connection, $_SESSION['user']);
                     //var_dump($user);
                     echo "Wybierz użytkownika: <br/>";
                     echo "<select name='receiverId'>";
@@ -85,5 +85,5 @@ if (isset($_SESSION['user'])) { ?>
     </html>
     <?php
 } else {
-    header('Location: index.php');
+    header('Location: book.php');
 }
