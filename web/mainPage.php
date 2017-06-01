@@ -75,8 +75,11 @@ if (isset($_SESSION['user'])) { ?>
                     echo "W dniu " . $row['date'] . " użytkownik " . $row['username'] . " napisał: <br/>";
                     echo $row['text'] . "<br/>";
                     echo "<form action='' method='POST'>";
-                    echo "<textarea name='commentText' cols='64' rows='2' placeholder='Dodaj swój komentarz' maxlength='60'></textarea><br/>";
-                    echo "<button class='btn btn-primary' type ='submit'>Dodaj komentarz</button>";
+                        echo "<div class='toggle-comment-form'>";
+                        echo "<span class='toggle'>Pokaż / ukryj</span>";
+                        echo "<textarea class='commentText' name='commentText' cols='64' rows='2' placeholder='Dodaj swój komentarz' maxlength='60'></textarea><br/>";
+                        echo "<button class='btn btn-primary' type ='submit'>Dodaj komentarz</button>";
+                    echo "</div>";
                     echo "<input type='hidden' name='tweetId' value='" . $row['id'] . "'/>";
                     echo "</form>";
                     $myComments = Comment::loadAllCommentsByTweetId($connection, $row['id']);
@@ -112,9 +115,10 @@ if (isset($_SESSION['user'])) { ?>
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="../js/bootstrap.js"></script>
+    <script src="../js/main.js"></script>
     </body>
     </html>
     <?php
 } else {
-    header('Location: book.php');
+    header('Location: index.php');
 }

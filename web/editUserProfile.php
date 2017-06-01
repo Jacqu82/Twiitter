@@ -9,8 +9,32 @@ session_start();
 $user = loggedUser($connection);
 
 if (isset($_SESSION['user'])) {
+    $message = false;
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['nick'])) {
+            $nick = $_POST['nick'];
+
+            if (strlen($nick) > 0) {
+                $u = User::loadUserById($connection, $_SESSION['user']);
+                $u->setUsername($nick);
+                $u->saveToDB($connection);
+                $message = "Nazwa użytkownika została zmieniona na: $nick";
+            }
+        }
+
+        if (isset($_POST['delete_account'])) {
+            $u = User::loadUserById($connection, $_SESSION['user']);
+            $u->delete($connection);
+            $c = Comment::loadAllComments()
+//            if ($u->delete($connection)) {
+//                unset($_SESSION);
+//                session_destroy();
+//                header('Location: index.php');
+//            }
+        }
+    }
 } else {
-    header('Location: book.php');
+    header('Location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -25,16 +49,16 @@ if (isset($_SESSION['user'])) {
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-3 row1">
+        <div class="col-md-2 col-sm-3 col-xs-5">
             <a href="messageSite.php" class="btn btn-primary btn-block">Wiadomości</a>
         </div>
-        <div class="col-md-2 col-sm-3 col-xs-3 row1">
+        <div class="col-md-2 col-sm-3 col-xs-5">
             <a href="userSite.php" class="btn btn-primary btn-block">Twoja strona</a>
         </div>
         <?php if ($user) {
-            echo "<span style='font-size: 25px;'>Jesteś zalogowany jako: " . $user->getUsername() . "</span>";
+            echo "<span style='font-size: 22px;'>Jesteś zalogowany jako: " . $user->getUsername() . "</span>";
         } ?>
-        <div class="col-md-2 col-sm-3 col-xs-3 col-md-push-6 row1">
+        <div class="col-md-2 col-sm-3 col-xs-5 col-md-push-6">
             <a href='logout.php' class="btn btn-success btn-block">Wyloguj się</a>
         </div>
     </div>
@@ -42,12 +66,12 @@ if (isset($_SESSION['user'])) {
         <a href="editUserProfile.php"><h1>Witaj na Twiterze!</h1></a>
     </div>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal" action="#" method="POST">
+        <div class="col-md-6 col-md-offset-3 user-row">
+            <form class="form-horizontal" method="POST">
                 <div class="form-group">
                     <label for="nameField" class="col-xs-2">Edytuj nick</label>
                     <div class="col-xs-10">
-                        <input type="text" class="form-control" id="nameField" name="'nick"
+                        <input type="text" class="form-control" id="nameField" name="nick"
                                placeholder="Edytuj swój nick"/>
                     </div>
                 </div>
@@ -57,8 +81,8 @@ if (isset($_SESSION['user'])) {
                 </div>
             </form>
         </div>
-        <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal" action="#" method="POST">
+        <div class="col-md-6 col-md-offset-3 user-row">
+            <form class="form-horizontal" method="POST">
                 <div class="form-group">
                     <label for="nameField" class="col-xs-2">Edytuj hasło</label>
                     <div class="col-xs-10">
@@ -72,11 +96,32 @@ if (isset($_SESSION['user'])) {
                 </div>
             </form>
         </div>
+        <div class="col-md-6 col-md-offset-3 user-row">
+            <form class="form-horizontal" method="POST">
+                <div class="col-xs-10 col-xs-offset-2">
+                    <input type="submit" class="btn btn-danger" name="delete_account" value="Usuń konto" />
+                </div>
+            </form>
+        </div>
+
+        <div class="col-xs-10 col-md-6 col-xs-offset-2 col-md-offset-3 user-row">
+            <?php
+                if ($message) {
+                    echo '<div class="flash-message alert alert-success alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <strong>' . $message . '</strong>
+                    </div>';
+                }
+            ?>
+        </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
 <script src="../js/bootstrap.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

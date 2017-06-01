@@ -69,7 +69,7 @@ if (isset($_SESSION['user'])) { ?>
                 $message->setReceiverId($receiverId);
                 $message->setMessageText($messageText);
                 $message->setCreationDate();
-                $message->setMessageStatus(0);
+                $message->setMessageStatus($connection, $message->getId(), 0);
                 $message->saveToDB($connection);
                 echo "Wysłałes wiadomość!";
             }
@@ -85,5 +85,5 @@ if (isset($_SESSION['user'])) { ?>
     </html>
     <?php
 } else {
-    header('Location: book.php');
+    header('Location: index.php');
 }

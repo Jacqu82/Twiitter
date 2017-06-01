@@ -2,7 +2,8 @@ body
 {
     background-color: #00b0ff;
     background-image: url("tweet.jpg");
-    background-size: contain;
+    background-size: 500px;
+    background-position: top left;
     color: #000000;
 }
 
@@ -30,4 +31,36 @@ h3 {
     text-align: center;
 }
 
+.commentText {
+    background: rgba(255, 255, 255, 0.60);
+    color: #000;
 
+    height: auto;
+    border: 2px #1883d6 solid;
+    resize: vertical;
+}
+
+.commentText:focus {
+    border-color: #00579a;
+    background: #fff;
+}
+
+.toggle-comment-form .toggle {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.toggle-comment-form .commentText,
+.toggle-comment-form button {
+    display: none;
+}
+
+.toggle-comment-form.s-expanded .commentText,
+.toggle-comment-form.s-expanded button {
+    display: block;
+}
+
+.user-row {
+    margin-bottom: 30px;
+    overflow: hidden;
+}
