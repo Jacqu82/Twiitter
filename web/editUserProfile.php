@@ -24,13 +24,12 @@ if (isset($_SESSION['user'])) {
 
         if (isset($_POST['delete_account'])) {
             $u = User::loadUserById($connection, $_SESSION['user']);
-            $u->delete($connection);
-            $c = Comment::loadAllComments()
-//            if ($u->delete($connection)) {
-//                unset($_SESSION);
-//                session_destroy();
-//                header('Location: index.php');
-//            }
+           if ($u->delete($connection)) {
+                if (isset($_SESSION['user'])) {
+                    unset($_SESSION['user']);
+                }
+                header('Location: index.php');
+           }
         }
     }
 } else {

@@ -209,9 +209,8 @@ class User
         if ($this->id != -1) {
             $sql = /** @lang text */
                 "DELETE FROM user WHERE id = $this->id";
-                echo $sql;
             $result = $connection->query($sql);
-//            var_dump($result); exit;
+            var_dump($result );
             if ($result) {
                 $this->id = -1;
                 return true;
