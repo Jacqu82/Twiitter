@@ -9,9 +9,8 @@ session_start();
 
 $user = loggedUser($connection);
 
-if (isset($_SESSION['user'])) { ?>
+if (isset($_SESSION['user'])) {
 
-    <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['set_message_as_read']) && isset($_POST['message_id'])) {
             $id = $_POST['message_id'];
@@ -19,6 +18,14 @@ if (isset($_SESSION['user'])) { ?>
         } else if (isset($_POST['set_message_as_unread']) && isset($_POST['message_id'])) {
             $id = $_POST['message_id'];
             Message::setMessageStatus($connection, $id, 0);
+        }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['delete_messege']) && isset($_POST['message_id'])) {
+            $messageId = $_POST['message_id'];
+            $message = Message::loadMessageById($connection, $messageId);
+            $message->deleteMessage($connection);
         }
     }
 
@@ -64,11 +71,15 @@ if (isset($_SESSION['user'])) { ?>
                         echo "<b>" . $row['text'] . "<br/>" . $row['date'] . "</b><br/>
                             <input type='submit'  name='set_message_as_read' value='Oznacz jako przeczytaną' class='btn btn-success' />
                             <input type='hidden' name='message_id' value='" . $row['id'] . " '>
+                            <input type=\"submit\" class=\"btn btn-primary\" name=\"delete_messege\" value=\"Usuń wiadomość\"/>
+                            <input type='hidden' name='message_id' value='" . $row['id'] . " '>
                         </form>";
                     } else {
                         echo "<form method='POST'>";
                         echo $row['text'] . "<br/>" . $row['date'] . "<br/>
                             <input type='submit'  name='set_message_as_unread' value='Oznacz jako nie przeczytaną' class='btn btn-success' />
+                            <input type='hidden' name='message_id' value='" . $row['id'] . " '>
+                            <input type=\"submit\" class=\"btn btn-primary\" name=\"delete_messege\" value=\"Usuń wiadomość\"/>
                             <input type='hidden' name='message_id' value='" . $row['id'] . " '>
                         </form>";
                     }
@@ -82,6 +93,10 @@ if (isset($_SESSION['user'])) { ?>
                     echo "Do " . $value['username'] . "<br/>";
                     echo $value['text'] . "<br/>";
                     echo $value['date'] . "<br/>";
+                    echo "<form method='POST'>
+                            <input type=\"submit\" class=\"btn btn-primary\" name=\"delete_messege\" value=\"Usuń wiadomość\"/>
+                            <input type='hidden' name='message_id' value='" . $value['id'] . " '>
+                          </form>";
                     echo "<hr/>";
                 }
                 ?>

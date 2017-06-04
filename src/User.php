@@ -130,7 +130,7 @@ class User
             $row = $result->fetch_assoc();
 
             $user = new User();
-            $user->setid($row['id']);
+            $user->setId($row['id']);
             $user->setEmail($row['email']);
             $user->setUsername($row['username']);
             $user->setHash($row['password']);
@@ -210,7 +210,7 @@ class User
             $sql = /** @lang text */
                 "DELETE FROM user WHERE id = $this->id";
             $result = $connection->query($sql);
-            var_dump($result );
+            //var_dump($result );
             if ($result) {
                 $this->id = -1;
                 return true;

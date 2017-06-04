@@ -48,43 +48,43 @@ if (isset($_SESSION['user'])) { ?>
                     echo "Wybierz użytkownika: <br/>";
                     echo "<select name='receiverId'>";
                     foreach ($user as $value) {
-                        echo "<option value='".$value['id']."'>".$value['username']."</option><br/>";
+                        echo "<option value='" . $value['id'] . "'>" . $value['username'] . "</option><br/>";
                     }
                     echo "</select>";
                     ?>
                     <textarea name="messageText" cols="64" rows="5" placeholder="Napisz wiadomość"
                               maxlength="140"></textarea><br/>
-                    <button class='btn btn-primary' type ='submit'>Wyślij</button>
+                    <button class='btn btn-primary' type='submit'>Wyślij wiadomość</button>
                 </form>
             </div>
         </div>
         <div class="col-xs-10 col-md-6 col-xs-offset-2 col-md-offset-3 user-row">
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['receiverId']) && isset($_POST['messageText'])) {
-                $receiverId = $_POST['receiverId'];
-                $messageText = $_POST['messageText'];
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['receiverId']) && isset($_POST['messageText'])) {
+                    $receiverId = $_POST['receiverId'];
+                    $messageText = $_POST['messageText'];
 
-                $message = new Message();
-                $message->setSenderId($_SESSION['user']);
-                $message->setReceiverId($receiverId);
-                $message->setMessageText($messageText);
-                $message->setCreationDate();
-                $message->setMessageStatus($connection, $message->getId(), 0);
-                $message->saveToDB($connection);
-                $send = Message::loadLastSendMessageByUserId($connection, $_SESSION['user']);
-                foreach ($send as $value) {
-                    echo '<div class="flash-message alert alert-success alert-dismissible" role="alert">
+                    $message = new Message();
+                    $message->setSenderId($_SESSION['user']);
+                    $message->setReceiverId($receiverId);
+                    $message->setMessageText($messageText);
+                    $message->setCreationDate();
+                    $message->setMessageStatus($connection, $message->getId(), 0);
+                    $message->saveToDB($connection);
+                    $send = Message::loadLastSendMessageByUserId($connection, $_SESSION['user']);
+                    foreach ($send as $value) {
+                        echo '<div class="flash-message alert alert-success alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
-                      <strong>Wysłałeś wiadomość do '. $value["username"] . '</strong>
+                      <strong>Wysłałeś wiadomość do ' . $value["username"] . '</strong>
                     </div>';
+                    }
                 }
             }
-        }
-        $connection->close();
-        ?>
+            $connection->close();
+            ?>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"

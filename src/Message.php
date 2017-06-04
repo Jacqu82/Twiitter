@@ -26,6 +26,14 @@ class Message
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     public function getSenderId()
     {
@@ -98,7 +106,6 @@ class Message
 
             if ($result) {
                 $this->id = $connection->insert_id;
-//                echo "Wysłałeś wiadomość";
             } else {
                 die("Connection Error" . $connection->connect_error);
             }
@@ -117,7 +124,8 @@ class Message
     static public function loadAllSendMessagesByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
-            "SELECT user.username, 
+            "SELECT user.username,
+            message.id,
             message.messageText as text,
             message.creationDate as date 
             FROM message 
@@ -171,7 +179,7 @@ class Message
     static public function loadLastSendMessageByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
-            "SELECT user.username, 
+            "SELECT user.username,
             message.messageText as text,
             message.creationDate as date 
             FROM message 
@@ -185,6 +193,46 @@ class Message
             die("Connection Error" . $connection->error);
         }
         return $result;
+    }
+
+    static public function loadMessageById(mysqli $connection, $id)
+    {
+        $id = $connection->real_escape_string($id);
+
+        $sql = /** @lang text */
+            "SELECT * FROM `message` WHERE `id` = $id";
+
+        $result = $connection->query($sql);
+
+        if ($result == true && $result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+
+            $message = new Message();
+            $message->setId($row['id']);
+            $message->setReceiverId($row['receiverId']);
+            $message->setSenderId($row['senderId']);
+            $message->setMessageText($row['messageText']);
+            $message->setCreationDate();
+
+            return $message;
+        }
+        return null;
+    }
+
+
+    public function deleteMessage(mysqli $connection)
+    {
+        if ($this->id != -1) {
+            $sql = /** @lang text */
+                "DELETE FROM message WHERE id = $this->id";
+            $result = $connection->query($sql);
+            if ($result) {
+                $this->id = -1;
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 
 
