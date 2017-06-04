@@ -58,6 +58,7 @@ if (isset($_SESSION['user'])) { ?>
                 </form>
             </div>
         </div>
+        <div class="col-xs-10 col-md-6 col-xs-offset-2 col-md-offset-3 user-row">
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['receiverId']) && isset($_POST['messageText'])) {
@@ -71,16 +72,26 @@ if (isset($_SESSION['user'])) { ?>
                 $message->setCreationDate();
                 $message->setMessageStatus($connection, $message->getId(), 0);
                 $message->saveToDB($connection);
-                echo "Wysłałes wiadomość!";
+                $send = Message::loadLastSendMessageByUserId($connection, $_SESSION['user']);
+                foreach ($send as $value) {
+                    echo '<div class="flash-message alert alert-success alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <strong>Wysłałeś wiadomość do '. $value["username"] . '</strong>
+                    </div>';
+                }
             }
         }
         $connection->close();
         ?>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="../js/bootstrap.js"></script>
+    <script src="../js/main.js"></script>
     </body>
     </html>
     <?php

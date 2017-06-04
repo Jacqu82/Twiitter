@@ -91,7 +91,8 @@ class Message
     {
         if ($this->id == -1) {
             $sql = /** @lang text */
-                "INSERT INTO message (senderId, receiverId, messageText, creationDate, messageStatus) VALUES ('$this->senderId', '$this->receiverId','$this->messageText', '$this->creationDate', '$this->messageStatus')";
+                "INSERT INTO message (senderId, receiverId, messageText, creationDate, messageStatus) 
+                VALUES ('$this->senderId', '$this->receiverId','$this->messageText', '$this->creationDate', '$this->messageStatus')";
 
             $result = $connection->query($sql);
 
@@ -158,6 +159,25 @@ class Message
             JOIN user ON message.senderId = user.id 
             WHERE message.receiverId = $userId 
             ORDER BY creationDate DESC";
+
+        $result = $connection->query($sql);
+
+        if ($result == false) {
+            die("Connection Error" . $connection->error);
+        }
+        return $result;
+    }
+
+    static public function loadLastSendMessageByUserId(mysqli $connection, $userId)
+    {
+        $sql = /** @lang text */
+            "SELECT user.username, 
+            message.messageText as text,
+            message.creationDate as date 
+            FROM message 
+            JOIN user ON message.receiverId = user.id 
+            WHERE message.senderId = $userId 
+            ORDER BY creationDate DESC LIMIT 1";
 
         $result = $connection->query($sql);
 

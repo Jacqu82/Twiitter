@@ -24,14 +24,28 @@ if (isset($_SESSION['user'])) {
 
         if (isset($_POST['delete_account'])) {
             $u = User::loadUserById($connection, $_SESSION['user']);
-           if ($u->delete($connection)) {
+            if ($u->delete($connection)) {
                 if (isset($_SESSION['user'])) {
                     unset($_SESSION['user']);
                 }
                 header('Location: index.php');
-           }
+            }
         }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['password'])) {
+            $password = $_POST['password'];
+
+            if (strlen($password) > 0) {
+                $pass = User::loadUserById($connection, $_SESSION['user']);
+                $pass->setPassword($password);
+                $pass->saveToDB($connection);
+                $message = "Hasło zostało zmienione";
+            }
+        }
+    }
+
 } else {
     header('Location: index.php');
 }
@@ -85,7 +99,7 @@ if (isset($_SESSION['user'])) {
                 <div class="form-group">
                     <label for="nameField" class="col-xs-2">Edytuj hasło</label>
                     <div class="col-xs-10">
-                        <input type="text" class="form-control" id="nameField" name="password"
+                        <input type="password" class="form-control" id="nameField" name="password"
                                placeholder="Edytuj swoje hasło"/>
                     </div>
                 </div>
@@ -98,21 +112,21 @@ if (isset($_SESSION['user'])) {
         <div class="col-md-6 col-md-offset-3 user-row">
             <form class="form-horizontal" method="POST">
                 <div class="col-xs-10 col-xs-offset-2">
-                    <input type="submit" class="btn btn-danger" name="delete_account" value="Usuń konto" />
+                    <input type="submit" class="btn btn-danger" name="delete_account" value="Usuń konto"/>
                 </div>
             </form>
         </div>
 
         <div class="col-xs-10 col-md-6 col-xs-offset-2 col-md-offset-3 user-row">
             <?php
-                if ($message) {
-                    echo '<div class="flash-message alert alert-success alert-dismissible" role="alert">
+            if ($message) {
+                echo '<div class="flash-message alert alert-success alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                       <strong>' . $message . '</strong>
                     </div>';
-                }
+            }
             ?>
         </div>
     </div>
