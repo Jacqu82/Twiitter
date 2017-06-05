@@ -86,9 +86,11 @@ class User
                     <link rel="stylesheet" href="../css/style.css">
                 </head>
                 <body>
-                <div style="text-align: center" class="container">
+                <div class="container">
+                <div class="col-md-3 col-sm-3 col-xs-3 row1">
                     <h3>Cieszymy się że tu jesteś, <?php echo $this->username ?></h3>
-                    <h3><a href="../web/loginForm.php">Zaloguj się na swoje konto</a></h3>
+                    <h3><a href="../web/loginForm.php" class="btn btn-primary btn-block">Zaloguj się na swoje konto</a></h3>
+                </div>
                 </div>
                 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
                         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -96,8 +98,6 @@ class User
                 <script src="../js/bootstrap.js"></script>
                 </body>
                 </html>
-                <!--                echo "Cieszymy się że tu jesteś, $this->username<br/>";-->
-                <!--                echo '<a href="../web/loginForm.php">Zaloguj się na swoje konto</a>';-->
                 <?php
             } else {
                 echo "Wystąpił błąd podczas rejestracji, spróbuj jeszcze raz!<br/>";

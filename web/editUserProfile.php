@@ -22,18 +22,6 @@ if (isset($_SESSION['user'])) {
             }
         }
 
-        if (isset($_POST['delete_account'])) {
-            $u = User::loadUserById($connection, $_SESSION['user']);
-            if ($u->delete($connection)) {
-                if (isset($_SESSION['user'])) {
-                    unset($_SESSION['user']);
-                }
-                header('Location: index.php');
-            }
-        }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['password'])) {
             $password = $_POST['password'];
 
@@ -44,8 +32,17 @@ if (isset($_SESSION['user'])) {
                 $message = "Hasło zostało zmienione";
             }
         }
-    }
 
+        if (isset($_POST['delete_account'])) {
+            $u = User::loadUserById($connection, $_SESSION['user']);
+            if ($u->delete($connection)) {
+                if (isset($_SESSION['user'])) {
+                    unset($_SESSION['user']);
+                }
+                header('Location: index1.php');
+            }
+        }
+    }
 } else {
     header('Location: index.php');
 }

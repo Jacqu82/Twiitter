@@ -37,15 +37,6 @@
         </div>
     </form>
 </div>
-
-<!--        <p>Masz konto? <a href="loginForm.php">Zaloguj się</a></p>-->
-<!--        <p>Utwórz nowe konto na Twiterze</p>-->
-<!--        <form method="POST" action="register.php">-->
-<!--            <p><label>Login: </label><input name="username" type="text"></label></p>-->
-<!--            <p><label>Email: <input name="email" type="email"></label></p>-->
-<!--            <p><label>Hasło: <input name="password" type="password"></label></p>-->
-<!--            <p><label><input type="submit" value="Zarejestruj się"></label></p>-->
-<!--        </form>-->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
