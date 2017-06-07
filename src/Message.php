@@ -26,9 +26,6 @@ class Message
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId($id)
     {
         $this->id = $id;
@@ -234,6 +231,4 @@ class Message
         }
         return true;
     }
-
-
 }

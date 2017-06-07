@@ -87,10 +87,11 @@ class User
                 </head>
                 <body>
                 <div class="container">
-                <div class="col-md-3 col-sm-3 col-xs-3 row1">
-                    <h3>Cieszymy się że tu jesteś, <?php echo $this->username ?></h3>
-                    <h3><a href="../web/loginForm.php" class="btn btn-primary btn-block">Zaloguj się na swoje konto</a></h3>
-                </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3 row1">
+                        <h3>Cieszymy się że tu jesteś, <?php echo $this->username ?></h3>
+                        <h3><a href="../web/loginForm.php" class="btn btn-primary btn-block">Zaloguj się na swoje
+                                konto</a></h3>
+                    </div>
                 </div>
                 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
                         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -210,7 +211,6 @@ class User
             $sql = /** @lang text */
                 "DELETE FROM user WHERE id = $this->id";
             $result = $connection->query($sql);
-            //var_dump($result );
             if ($result) {
                 $this->id = -1;
                 return true;
@@ -219,6 +219,4 @@ class User
         }
         return true;
     }
-
 }
-

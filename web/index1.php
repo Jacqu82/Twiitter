@@ -9,6 +9,7 @@ session_start();
 $user = loggedUser($connection);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>

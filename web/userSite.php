@@ -12,6 +12,7 @@ $user = loggedUser($connection);
 
 if (isset($_SESSION['user'])) {
     ?>
+
     <!DOCTYPE html>
     <html lang="pl">
     <head>
@@ -41,7 +42,8 @@ if (isset($_SESSION['user'])) {
             <div class="col-md-2 col-sm-3 col-xs-3 row1">
                 <a href='logout.php' class="btn btn-success btn-block">Wyloguj się</a>
             </div>
-        </div><br/><br/>
+        </div>
+        <br/><br/>
         <div class="row">
             <a href="userSite.php"><h1>Witaj na Twiterze!</h1></a>
         </div>
@@ -71,6 +73,7 @@ if (isset($_SESSION['user'])) {
     <script src="../js/bootstrap.js"></script>
     </body>
     </html>
+
     <?php
 } else {
     header('Location: index.php');

@@ -109,6 +109,7 @@ if (isset($_SESSION['user'])) {
     <script src="../js/bootstrap.js"></script>
     </body>
     </html>
+
     <?php
 } else {
     header('Location: index.php');

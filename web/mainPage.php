@@ -11,6 +11,7 @@ session_start();
 $user = loggedUser($connection);
 
 if (isset($_SESSION['user'])) { ?>
+
     <!DOCTYPE html>
     <html lang="pl">
     <head>
@@ -89,8 +90,7 @@ if (isset($_SESSION['user'])) { ?>
                     }
                     echo "<hr/>";
                 }
-
-
+                
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['commentText']) && isset($_POST['tweetId'])) {
                         $commentText = $_POST['commentText'];
