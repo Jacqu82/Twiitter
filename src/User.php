@@ -118,7 +118,7 @@ class User
         return false;
     }
 
-    static public function loadUserById(mysqli $connection, $id)
+    public static function loadUserById(mysqli $connection, $id)
     {
         $id = $connection->real_escape_string($id);
 
@@ -141,7 +141,7 @@ class User
         return null;
     }
 
-    static public function loadUserByUsername(mysqli $connection, $username)
+    public static function loadUserByUsername(mysqli $connection, $username)
     {
         $username = $connection->real_escape_string($username);
 
@@ -166,7 +166,7 @@ class User
         }
     }
 
-    static public function loadUserByEmail(mysqli $connection, $email)
+    public static function loadUserByEmail(mysqli $connection, $email)
     {
         $email = $connection->real_escape_string($email);
 
@@ -191,7 +191,7 @@ class User
         }
     }
 
-    static public function loadAllUsersExcerptMe(mysqli $connection, $me)
+    public static function loadAllUsersExcerptMe(mysqli $connection, $me)
     {
         $sql = /** @lang text */
             "SELECT user.id as id,user.username as username,user.email as email,user.password as password FROM user 

@@ -55,7 +55,7 @@ class Tweet
     }
 
 
-    static public function loadTweetById(mysqli $connection, $id)
+    public static function loadTweetById(mysqli $connection, $id)
     {
         $sql = /** @lang text */
             "SELECT * FROM tweet WHERE id = $id";
@@ -74,7 +74,7 @@ class Tweet
         return null;
     }
 
-    static public function loadAllTweets(mysqli $connection)
+    public static function loadAllTweets(mysqli $connection)
     {
         $sql = /** @lang text */
             "SELECT tweet.id as id, user.username as username,tweet.tweetText as text,tweet.creationDate as date FROM tweet JOIN user ON tweet.userId = user.id ORDER BY creationDate DESC";
@@ -87,7 +87,7 @@ class Tweet
         return $result;
     }
 
-    static public function loadTweetByUserId(mysqli $connection, $userId)
+    public static function loadTweetByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
             "SELECT tweet.id as id,tweet.tweetText as text,tweet.creationDate as date FROM tweet JOIN user ON tweet.userId = user.id WHERE tweet.userId = $userId ORDER BY creationDate DESC";

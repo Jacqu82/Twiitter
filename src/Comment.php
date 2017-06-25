@@ -90,7 +90,7 @@ class Comment
         return false;
     }
 
-    static public function loadAllCommentsByTweetId(mysqli $connection, $tweetId)
+    public static function loadAllCommentsByTweetId(mysqli $connection, $tweetId)
     {
         $sql = /** @lang text */
             "SELECT user.username as username,comment.commentText as text,comment.creationDate as date, user.id FROM comment JOIN user ON userId=user.id WHERE comment.tweetId=" . $tweetId . " ORDER BY creationDate DESC";
@@ -103,7 +103,7 @@ class Comment
         return $result;
     }
 
-    static public function loadAllComments(mysqli $connection)
+    public static function loadAllComments(mysqli $connection)
     {
         $sql = /** @lang text */
             "SELECT user.username as username,comment.id as id,comment.commentText as text,comment.creationDate as date FROM comment JOIN user ON userId=user.id JOIN tweet ON comment.tweetId = tweet.id ORDER BY date DESC";

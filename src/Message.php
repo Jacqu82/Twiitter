@@ -118,7 +118,7 @@ class Message
         return false;
     }
 
-    static public function loadAllSendMessagesByUserId(mysqli $connection, $userId)
+    public static function loadAllSendMessagesByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
             "SELECT user.username,
@@ -138,7 +138,7 @@ class Message
         return $result;
     }
 
-    static public function setMessageStatus(mysqli $connection, $messageId, $status)
+    public static function setMessageStatus(mysqli $connection, $messageId, $status)
     {
         $sql = /** @lang text */
             "UPDATE message SET messageStatus = '$status' WHERE id = $messageId";
@@ -151,7 +151,7 @@ class Message
         return true;
     }
 
-    static public function loadAllReceivedMessagesByUserId(mysqli $connection, $userId)
+    public static function loadAllReceivedMessagesByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
             "SELECT user.username,
@@ -173,7 +173,7 @@ class Message
         return $result;
     }
 
-    static public function loadLastSendMessageByUserId(mysqli $connection, $userId)
+    public static function loadLastSendMessageByUserId(mysqli $connection, $userId)
     {
         $sql = /** @lang text */
             "SELECT user.username,
@@ -192,7 +192,7 @@ class Message
         return $result;
     }
 
-    static public function loadMessageById(mysqli $connection, $id)
+    public static function loadMessageById(mysqli $connection, $id)
     {
         $id = $connection->real_escape_string($id);
 
